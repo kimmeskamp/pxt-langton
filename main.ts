@@ -5,8 +5,8 @@
 
 namespace langton {
 
-    let y = 0
-    let x = 0
+    let y = 2
+    let x = 2
     let richtung = 2
 
     /**
