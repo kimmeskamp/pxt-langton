@@ -18,21 +18,21 @@ namespace langton {
     
     let y = 2
     let x = 2
-    let richtung = 2
+    let richtung = 1
 
     /**
         * Setzt Niki auf die angegebenen Koordinaten mit Blick in die angegebene Richtung.
         */
-    //% block
-    export function setzeAmeise(x: number, y: number, richtung: himmelsrichtungen): void {
-        if (x >= 0 && x < 5) {
-            x = x
+    //% block="setze Ameise auf|x $x_neu|y $y_neu|Richtung $richtung_neu"
+    export function setzeAmeise(x_neu: number, y_neu: number, richtung_neu: himmelsrichtungen): void {
+        if (x_neu >= 0 && x_neu < 5) {
+            x = x_neu
         }
-        if (y >= 0 && y < 5) {
-            y = y
+        if (y_neu >= 0 && y_neu < 5) {
+            y = y_neu
         }
-        if (richtung >= 0 && richtung < 4) {
-            richtung = richtung
+        if (richtung_neu >= 0 && richtung_neu < 4) {
+            richtung = richtung_neu
         }
         led.plot(x, y)
     }
@@ -40,7 +40,7 @@ namespace langton {
     /**
     * Gehe ein Feld vor (wenn der Bildschirm zu Ende ist, fange an der gegenüberliegenden Seite an).
     */
-    //% block
+    //% block="gehe vor"
     export function geheVor(): void {
         if (richtung == 0) {
             if (y > 0) {
@@ -72,20 +72,8 @@ namespace langton {
     /**
     * Drehe dich um 90° nach links.
     */
-    //% block
+    //% block="drehe links"
     export function dreheLinks(): void {
-        if (richtung < 3) {
-            richtung += 1
-        } else {
-            richtung = 0
-        }
-    }
-
-    /**
-    * Drehe dich um 90° nach rechts.
-    */
-    //% block
-    export function dreheRechts(): void {
         if (richtung > 0) {
             richtung += -1
         } else {
@@ -94,17 +82,37 @@ namespace langton {
     }
 
     /**
+    * Drehe dich um 90° nach rechts.
+    */
+    //% block="drehe rechts"
+    export function dreheRechts(): void {
+        if (richtung < 3) {
+            richtung += 1
+        } else {
+            richtung = 0
+        }
+    }
+
+    /**
      * Lege eine Spur, wenn das Feld vorher leer war; ansonsten lösche sie.
      */
-    //% block
-    export function aendereSpur(): void {
-        led.toggle(x, y)
+    //% block="markiere Feld"
+    export function markiereFeld(): void {
+        led.plot(0, 0)
+    }
+
+    /**
+     * Lege eine Spur, wenn das Feld vorher leer war; ansonsten lösche sie.
+     */
+    //% block="lösche Spur"
+    export function loescheSpur(): void {
+        led.unplot(0, 0)
     }
 
     /**
     * Liefert "true", wenn sich die Ameise auf der Spur befindet.
     */
-    //% block
+    //% block="auf Spur"
     export function aufSpur(): boolean {
         return led.point(x, y)
     }
