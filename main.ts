@@ -5,9 +5,37 @@
 
 namespace langton {
 
+    export enum himmelsrichtungen {
+        //% block="Norden"
+        norden = 0,
+        //% block="Osten"
+        osten = 1,
+        //% block="Süden"
+        sueden = 2,
+        //% block="Westen"
+        westen = 3,
+    }
+    
     let y = 2
     let x = 2
     let richtung = 2
+
+    /**
+        * Setzt Niki auf die angegebenen Koordinaten mit Blick in die angegebene Richtung.
+        */
+    //% block
+    export function setzeAmeise(x: number, y: number, richtung: himmelsrichtungen): void {
+        if (x >= 0 && x < 5) {
+            x = x
+        }
+        if (y >= 0 && y < 5) {
+            y = y
+        }
+        if (richtung >= 0 && richtung < 4) {
+            richtung = richtung
+        }
+        led.plot(x, y)
+    }
 
     /**
     * Gehe ein Feld vor (wenn der Bildschirm zu Ende ist, fange an der gegenüberliegenden Seite an).
@@ -69,7 +97,7 @@ namespace langton {
      * Lege eine Spur, wenn das Feld vorher leer war; ansonsten lösche sie.
      */
     //% block
-    export function aendereFeld(): void {
+    export function aendereSpur(): void {
         led.toggle(x, y)
     }
 
