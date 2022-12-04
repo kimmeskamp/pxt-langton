@@ -1,7 +1,7 @@
 /**
  * Langtons Ameise
  */
-//% weight=100 color=#0fbc11
+//% weight=100 color=#0fbc11 icon="\uf0c3"
 
 namespace langton {
 
@@ -18,7 +18,7 @@ namespace langton {
     
     let y = 2
     let x = 2
-    let richtung = 1
+    let richtung = 0
 
     /**
         * Setzt Niki auf die angegebenen Koordinaten mit Blick in die angegebene Richtung.
@@ -34,11 +34,10 @@ namespace langton {
         if (richtung_neu >= 0 && richtung_neu < 4) {
             richtung = richtung_neu
         }
-        led.plot(x, y)
     }
 
     /**
-    * Gehe ein Feld vor (wenn der Bildschirm zu Ende ist, fange an der gegenüberliegenden Seite an).
+    * Gehe ein Feld vor (wenn der Bildschirm zu Ende ist, fange auf der gegenüberliegenden Seite an).
     */
     //% block="gehe vor"
     export function geheVor(): void {
@@ -94,19 +93,19 @@ namespace langton {
     }
 
     /**
-     * Lege eine Spur, wenn das Feld vorher leer war; ansonsten lösche sie.
+     * Markiere das aktuelle Feld als Teil der Ameisenspur.
      */
     //% block="markiere Feld"
     export function markiereFeld(): void {
-        led.plot(0, 0)
+        led.plot(x, y)
     }
 
     /**
-     * Lege eine Spur, wenn das Feld vorher leer war; ansonsten lösche sie.
+     * Lösche die Ameisenspur auf dem aktuellen Feld.
      */
     //% block="lösche Spur"
     export function loescheSpur(): void {
-        led.unplot(0, 0)
+        led.unplot(x, y)
     }
 
     /**
